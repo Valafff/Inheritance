@@ -35,7 +35,7 @@ namespace Academy
 
 		public override string ToString()
 		{
-			return $"{LastName} {FirstName} {Age} лет.";
+			return $"Фамилия {LastName} Имя {FirstName} Возраст {Age} лет.";
 		}
 		public void printInfo()
 		{

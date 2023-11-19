@@ -42,23 +42,29 @@ namespace Academy
 				new Graduate("Гэри", "1", 20, "Клонирование", "Биология", 99, 99, "Издевательство над разнообразием", 85),
 				new Teacher("Уайт", "Воултер", 50, "Химия", 20)
 			};
-			foreach(Human groupItem in group)
+			foreach (Human groupItem in group)
 			{
-                Console.WriteLine(groupItem);
-            }
+				Console.WriteLine(groupItem);
+			}
 
 			//Запись в файл
-            //Console.WriteLine(Directory.GetCurrentDirectory());
+			//Console.WriteLine(Directory.GetCurrentDirectory());
 			string directory = Directory.GetCurrentDirectory();
 			string filename = "Group.txt";
 
-            StreamWriter streamWriter = new StreamWriter(filename);
+			StreamWriter streamWriter = new StreamWriter(filename);
 			foreach (Human groupItem in group)
 			{
 				streamWriter.WriteLine(groupItem);
 			}
-
 			streamWriter.Close();
+
+			//Добавление текста
+			Student stud = new Student("Фриман", "Гордон", 25, "Квантовая физика", "КФ-005", 2, 10);
+			StreamWriter appendToFile = File.AppendText(filename);
+			appendToFile.WriteLine(stud);
+			appendToFile.Close();
+
 
 			//Открытие файла после выполнения!
 			string cmd = directory + "\\" + filename;
@@ -76,6 +82,6 @@ namespace Academy
 				Console.WriteLine(temp);
 			}
 			sr.Close();
-        }
+		}
 	}
 }
