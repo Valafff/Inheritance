@@ -71,7 +71,7 @@ namespace Academy
 			//Передача процессу коммандную строку
 			System.Diagnostics.Process.Start("notepad", cmd);
 
-			//Чтение из файла
+			//Чтение из файла (Вывод строки)
 			Console.WriteLine($"\nПрочитано из файла {filename}:");
 
 			StreamReader sr = new StreamReader(filename);
@@ -79,9 +79,106 @@ namespace Academy
 			while (!sr.EndOfStream)
 			{
 				temp = sr.ReadLine();
+				//temp_firstName += sr.Read();
 				Console.WriteLine(temp);
 			}
-			sr.Close();
-		}
+
+			string temp2;
+			List<Human> Grouplist = new List<Human>();	
+
+			string temp_firstName;
+			string temp_lastName;
+			int temp_age;
+			string temp_Specialization;
+			string temp_Group;
+			double temp_rating;
+			double temp_attendance;
+			int temp_exp;
+			string temp_subj;
+			int temp_progress;
+
+
+
+			StreamReader sr2 = new StreamReader(filename);
+			while (!sr2.EndOfStream)
+			{
+
+				temp_firstName ="";
+				temp_lastName = "";
+				temp_age = 0;
+				temp_Specialization = "";
+				temp_Group = "";
+				temp_rating = 0;
+				temp_attendance = 0;
+				temp_exp = 0;
+				temp_subj = "";
+				temp_progress = 0;
+
+				temp2 = sr2.ReadLine();
+				string[] temp_array = temp2.Split(' ');
+				for (int i = 0; i < temp_array.Length; i++)
+				{
+					//Console.WriteLine(temp_array[i]);
+					if (temp_array[i] == "Имя")
+					{
+						temp_firstName = temp_array[i + 1];
+					}
+					if (temp_array[i] == "Фамилия")
+					{
+						temp_lastName = temp_array[i + 1];
+					}
+					if (temp_array[i] == "Возраст")
+					{
+						temp_age = Convert.ToInt32 (temp_array[i + 1]);
+					}
+					if (temp_array[i] == "Специализация:")
+					{
+						temp_Specialization = temp_array[i + 1];
+					}
+					if (temp_array[i] == "Группа:")
+					{
+						temp_Group = temp_array[i + 1];
+					}
+					if (temp_array[i] == "Рейтинг:")
+					{
+						temp_rating = Convert.ToDouble(temp_array[i + 1]);
+					}
+					if (temp_array[i] == "Посещаемость:")
+					{
+						temp_attendance = Convert.ToDouble(temp_array[i + 1]);
+					}
+					if (temp_array[i] == "Стаж:")
+					{
+						temp_exp = Convert.ToInt32( temp_array[i + 1]);
+					}
+					if (temp_array[i] == "Готовность:")
+					{
+						temp_progress = Convert.ToInt32((temp_array[i + 1]));
+					}
+				}
+				if (temp_exp != 0)
+				{
+					Human temphuman = new Teacher(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_exp);
+					Grouplist.Add(temphuman);
+				}
+				if (temp_Group != "" && temp_subj == "")
+				{
+					Human temphuman = new Student(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_Group, temp_rating, temp_attendance);
+					Grouplist.Add(temphuman);
+				}
+				if (temp_Group != "" && temp_subj != "")
+				{
+					Human temphuman = new Graduate(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_Group, temp_rating, temp_attendance, temp_subj, temp_progress);
+					Grouplist.Add(temphuman);
+				}
+				//Console.WriteLine(temp2);
+			}
+            sr.Close();
+            Console.WriteLine("ПРОЧИТАННЫЕ ОБЪЕКТЫ");
+			for (int i = 0; i < Grouplist.Count; i++)
+			{
+				Console.WriteLine(Grouplist[i]);
+            }
+        }
 	}
 }

@@ -31,11 +31,11 @@ namespace Academy
 		new public void printInfo()
 		{
 			base.printInfo();
-			Console.WriteLine($"Название итоговой работы: {graduationWorkName} Готовность итоговой работы: {graduationWorkNamePercent}%");
+			Console.WriteLine($"Название итоговой работы: {graduationWorkName} Готовность итоговой работы: {graduationWorkNamePercent} %");
 		}
 		public override string ToString()
 		{
-			return base.ToString() + $" {graduationWorkName}, готовность: {graduationWorkNamePercent}%";
+			return base.ToString() + $" Название итоговой работы: {graduationWorkName}, Готовность: {graduationWorkNamePercent} %";
 		}
 	}
 
