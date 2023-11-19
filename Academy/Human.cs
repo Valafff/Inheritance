@@ -30,7 +30,7 @@ namespace Academy
 			this.Age = right.Age;
             Console.WriteLine("HCopyConstructor:"+GetHashCode());
         }
-
+	
 
 
 		public override string ToString()
