@@ -60,7 +60,7 @@ namespace Academy
 		}
 		public override string ToString()
 		{
-			return base.ToString() + $"Группа: {Group} Рейтинг: {Rating} Посещаемость: {Attendance}";
+			return base.ToString() + $" Специализация: {Speciality} Группа: {Group} Рейтинг: {Rating} Посещаемость: {Attendance}";
 		}
 	}
 }
