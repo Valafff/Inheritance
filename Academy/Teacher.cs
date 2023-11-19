@@ -22,7 +22,7 @@ namespace Academy
 			Console.WriteLine("TDestructor:\t" + GetHashCode());
 		}
 
-		public void printInfo()
+		new public void printInfo()
 		{
 			base.printInfo();
 			Console.WriteLine($"Специализация: {Speciality} Стаж: {Experience} лет");

@@ -53,7 +53,7 @@ namespace Academy
 
 
 
-		public void  printInfo()
+		new public void  printInfo()
 		{
 			base.printInfo();
 			Console.WriteLine($"Группа: {Group} Рейтинг: {Rating} Посещаемость: {Attendance}");

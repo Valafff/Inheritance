@@ -28,7 +28,7 @@ namespace Academy
 		{
 			Console.WriteLine("GDestructor:\t" + GetHashCode());
 		}
-		public void printInfo()
+		new public void printInfo()
 		{
 			base.printInfo();
 			Console.WriteLine($"Название итоговой работы: {graduationWorkName} Готовность итоговой работы: {graduationWorkNamePercent}%");
