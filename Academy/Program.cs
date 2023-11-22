@@ -14,7 +14,7 @@ namespace Academy
 	{
 		static void Main(string[] args)
 		{
-			//Human human = new Human("Иванов", "Иван", 20);
+			Human ivan = new Human("Иванов", "Иван", 20);
 			//Student stud = new Student("Фриман", "Гордон", 25, "Квантовая физика", "КФ-005", 2, 10);
 			//Teacher teacher = new Teacher("Фрасворт", "Хьюберт", 70, "Квантовая физика", 40);
 			//Graduate grad = new Graduate("Симсон", "Гомер", 25, "Квантовая физика", "КФ-005", 99, 2, "Ядерные реакции при употреблении пива", 25);
@@ -36,6 +36,7 @@ namespace Academy
 
 			Human[] group = new Human[]
 			{
+				ivan,
 				new Student ("Сумкин", "Фёдор", 30, "Финансы", "ГР-01", 50, 50),
 				new Student ("Сидоров", "Пётр", 24, "Финансы", "ГР-01", 35, 75),
 				new Student ("Фантазия", "Закончилась", 27, "Финансы", "ГР-01", 20, 99),
@@ -55,7 +56,7 @@ namespace Academy
 			StreamWriter streamWriter = new StreamWriter(filename);
 			foreach (Human groupItem in group)
 			{
-				streamWriter.WriteLine(groupItem);
+				streamWriter.WriteLine($"{groupItem.GetType()} {groupItem}");
 			}
 			streamWriter.Close();
 
@@ -82,7 +83,7 @@ namespace Academy
 				//temp_firstName += sr.Read();
 				Console.WriteLine(temp);
 			}
-
+			string tempSpec;
 			string temp2;
 			List<Human> Grouplist = new List<Human>();	
 
@@ -102,7 +103,7 @@ namespace Academy
 			StreamReader sr2 = new StreamReader(filename);
 			while (!sr2.EndOfStream)
 			{
-
+				tempSpec = "";
 				temp_firstName ="";
 				temp_lastName = "";
 				temp_age = 0;
@@ -114,11 +115,30 @@ namespace Academy
 				temp_subj = "";
 				temp_progress = 0;
 
+
 				temp2 = sr2.ReadLine();
 				string[] temp_array = temp2.Split(' ');
 				for (int i = 0; i < temp_array.Length; i++)
 				{
 					//Console.WriteLine(temp_array[i]);
+					if (temp_array[i] == "Academy.Human")
+					{
+						tempSpec = "Academy.Human";
+					}
+					if (temp_array[i] == "Academy.Student")
+					{
+						tempSpec = "Academy.Student";
+					}
+					if (temp_array[i] == "Academy.Graduate")
+					{
+						tempSpec = "Academy.Graduate";
+					}
+					if (temp_array[i] == "Academy.Teacher")
+					{
+						tempSpec = "Academy.Teacher";
+					}
+
+
 					if (temp_array[i] == "Имя")
 					{
 						temp_firstName = temp_array[i + 1];
@@ -156,21 +176,43 @@ namespace Academy
 						temp_progress = Convert.ToInt32((temp_array[i + 1]));
 					}
 				}
-				if (temp_exp != 0)
+
+				if (tempSpec == "Academy.Human")
 				{
-					Human temphuman = new Teacher(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_exp);
+					Human temphuman = new Human(temp_lastName, temp_firstName, temp_age);
 					Grouplist.Add(temphuman);
 				}
-				if (temp_Group != "" && temp_subj == "")
+				if (tempSpec == "Academy.Student")
 				{
 					Human temphuman = new Student(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_Group, temp_rating, temp_attendance);
 					Grouplist.Add(temphuman);
 				}
-				if (temp_Group != "" && temp_subj != "")
+				if (tempSpec == "Academy.Graduate")
 				{
 					Human temphuman = new Graduate(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_Group, temp_rating, temp_attendance, temp_subj, temp_progress);
 					Grouplist.Add(temphuman);
 				}
+				if (tempSpec == "Academy.Teacher")
+				{
+					Human temphuman = new Teacher(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_exp);
+					Grouplist.Add(temphuman);
+				}
+
+				//if (temp_exp != 0)
+				//{
+				//	Human temphuman = new Teacher(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_exp);
+				//	Grouplist.Add(temphuman);
+				//}
+				//if (temp_Group != "" && temp_subj == "")
+				//{
+				//	Human temphuman = new Student(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_Group, temp_rating, temp_attendance);
+				//	Grouplist.Add(temphuman);
+				//}
+				//if (temp_Group != "" && temp_subj != "")
+				//{
+				//	Human temphuman = new Graduate(temp_lastName, temp_firstName, temp_age, temp_Specialization, temp_Group, temp_rating, temp_attendance, temp_subj, temp_progress);
+				//	Grouplist.Add(temphuman);
+				//}
 				//Console.WriteLine(temp2);
 			}
             sr.Close();
